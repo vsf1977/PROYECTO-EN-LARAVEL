@@ -42,7 +42,12 @@ class Usercontroller extends Controller
 
     public function guardar()
     {
-        $data =  request()->all();
+        $data =  request()->validate(['nombre'=>'required']);
+        $usuario = Usuarios::where('correo', '=', $data['correo'])->get();
+        if (count($usuario))
+        {
+            return redirect('usuarios/nuevo')->withErrors(['correo'=>'Este correo ya fue registrado']);
+        }
         return ($data['nombre'].$data['correo'].$data['profesion'].$data['pass']);
     }
 
