@@ -23,5 +23,7 @@ class ProfesionesSeeder extends Seeder
 
         Profesiones::create(['titulo'=>'Music@']);
 
+        Profesiones::create(['titulo'=>'Abogado@']);
+
     }
 }

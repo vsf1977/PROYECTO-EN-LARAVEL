@@ -17,12 +17,12 @@
         <label for="profesion">Profesion :</label>
         <select name="profesion" required>
         @foreach ($profesiones as $profesion)
-            <option value="{{$profesion->id}}">{{$profesion->titulo}}</option> 
+            <option value="{{$profesion->id}}">{{$profesion->titulo}}</option>
         @endforeach
-        </select><br><br>  
+        </select><br><br>
         <label for="pass">Contraseña :</label>
-        <input type="password" name='pass' minlength="6" required><br><br>                
-        <button type="submit">Guardar</button><br>
+        <input type="password" name='pass' minlength="6" required><br><br>
+        <button type="submit">Guardar</button><br><br>
     </form>
     <a href="{{ url('/usuarios') }}">Menu de usuarios</a><br>
 </body>

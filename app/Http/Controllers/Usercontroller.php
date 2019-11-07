@@ -42,7 +42,8 @@ class Usercontroller extends Controller
 
     public function guardar()
     {
-        return ('se guarda el usuario');
+        $data =  request()->all();
+        return ($data['nombre'].$data['correo'].$data['profesion'].$data['pass']);
     }
 
 }
