@@ -42,13 +42,26 @@ class Usercontroller extends Controller
 
     public function guardar()
     {
-        $data =  request()->validate(['nombre'=>'required']);
-        $usuario = Usuarios::where('correo', '=', $data['correo'])->get();
+        $rules = ['correo'=>'required|unique:Usuarios','nombre' =>'required','pass'=>'required|min:6'];
+        $messages = ['nombre.required' => 'El campo nombre es obligatorio',
+                    'correo.required' => 'El campo correo es obligatorio',
+                    'correo.unique' => 'Este correo ya esta registrado',
+                    'pass.required' => 'El campo password es obligatorio',
+                    'pass.min' => 'La contraseña debe ser minimo 6 caracteres'];                    
+        $this->validate(request(), $rules, $messages); 
+        $data =  request()->all();
+        /*$usuario = Usuarios::where('correo', '=', $data['correo'])->get();
         if (count($usuario))
         {
             return redirect('usuarios/nuevo')->withErrors(['correo'=>'Este correo ya fue registrado']);
-        }
-        return ($data['nombre'].$data['correo'].$data['profesion'].$data['pass']);
+        }*/
+        $Usuario = new Usuarios;
+        $Usuario->nombre = request()->nombre;
+        $Usuario->correo = request()->correo;
+        $Usuario->profesion_id = request()->profesion;
+        $Usuario->password = bcrypt(request()->pass);
+        $Usuario->save();
+        return redirect('usuarios/lista');
     }
 
 }

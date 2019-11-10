@@ -13,8 +13,6 @@
             <li>
                 {{ $usuario->nombre }}
                 <a href="{{ url('/usuarios/detalles/'.$usuario->id) }}">Ver detalle</a>
-                <a href="{{ route('usuarios.detalles',['id' => $usuario->id]) }}">Ver detalle</a>
-                <a href="{{ action('Usercontroller@detalles',['id' => $usuario->id]) }}">Ver detalle</a>
             </li>
         @endforeach
     </ul>

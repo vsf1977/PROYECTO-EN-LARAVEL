@@ -11,17 +11,30 @@
     <form method="POST" action="{{ url('usuarios/guardar') }}">
         {!! csrf_field() !!}
         <label for="nombre">Nombre :</label>
-        <input type="text" name='nombre' required><br><br>
+        <input type="text" name='nombre' required>
+        @if ($errors->has('nombre'))
+             <span style='color: red;'>{{ $errors->first('nombre') }}</span> 
+        @endif
+        <br><br>
         <label for="correo">Correo :</label>
-        <input type="email" name='correo' required><br><br>
+        <input type="email" name='correo' required>
+        @if ($errors->has('correo'))
+             <span style='color: red;'>{{ $errors->first('correo') }}</span> 
+        @endif
+        <br><br>
         <label for="profesion">Profesion :</label>
-        <select name="profesion" required>
+        <select name="profesion">
         @foreach ($profesiones as $profesion)
             <option value="{{$profesion->id}}">{{$profesion->titulo}}</option>
         @endforeach
-        </select><br><br>
+        </select>         
+        <br><br>
         <label for="pass">Contraseña :</label>
-        <input type="password" name='pass' minlength="6" required><br><br>
+        <input type="password" name='pass'>
+        @if ($errors->has('pass'))
+             <span style='color: red;'>{{ $errors->first('pass') }}</span> 
+        @endif
+        <br><br>
         <button type="submit">Guardar</button><br><br>
     </form>
     <a href="{{ url('/usuarios') }}">Menu de usuarios</a><br>
