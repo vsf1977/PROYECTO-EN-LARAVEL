@@ -23,13 +23,13 @@ class Usercontroller extends Controller
     public function detalles($id)
     {
         $usuario = Usuarios::where('id', '=', $id)->get();
-        $profesion = Profesiones::where('id', '=', $id)->get();
+        $profesion = Profesiones::where('id', '=', $usuario[0]->profesion_id)->get();
         if (!count($usuario))
         {
             return response()->view('error404',[],404);
         }
         else
-        {
+        {            
             return view('usuarios/detalles',compact('usuario','profesion'));
         }
     }
